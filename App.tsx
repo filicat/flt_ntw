@@ -11,7 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import "./global.css"
 import {persistor, store} from './src/redux/store';
 import { Provider } from 'react-redux';
-
+import 'reflect-metadata'; 
 
 function App(): React.JSX.Element {
   return (

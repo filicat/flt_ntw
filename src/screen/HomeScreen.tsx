@@ -13,7 +13,7 @@ export function HomeScreen({ route, navigation }: HomeScreenProps) {
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'green' }}>
-            <Text>{userInfo?`Welcome ${userInfo.realname}`:'未登录'}</Text>
+            <Text>{userInfo?`Welcome ${userInfo.realname} ${userInfo.createTime.getFullYear()}`:'未登录'}</Text>
             {userInfo ?
             <>
                 <Button title="Logout" onPress={handleLogout} />

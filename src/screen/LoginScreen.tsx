@@ -7,8 +7,8 @@ import { login } from "../redux/authSlice";
 export const LoginScreen = ({ route, navigation }: LoginScreenProps) => {
     const dispatch = useDispatch();
     const handleLogin = () => {
-        LoginApi("admin", "123456").then(res => {
-            dispatch(login(res.result));
+        LoginApi("admin", "123456").then(ret => {
+            dispatch(login(ret));
             navigation.navigate("Home");
         }).catch(e => {
             Alert.alert("登录失败", e.message, [{ text: "确定" }]);
