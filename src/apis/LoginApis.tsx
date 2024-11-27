@@ -1,6 +1,6 @@
 import axios, { Axios } from "axios";
 import { AuthInfo, JegResult, UserInfo } from "../types";
-import { plainToClass } from "class-transformer";
+import { plainToClass, plainToClassFromExist } from "class-transformer";
 
 export const BASE_URL = 'http://172.16.5.142:8080/jeecg-boot';
 
@@ -15,7 +15,9 @@ export const LoginApi = async (username: string, password: string): Promise<Auth
     if (!response.data.success) {
         throw new Error('Login Fail, Message:' +  response.data.message);
     }
-    const retAuthInfo = plainToClass(AuthInfo, response.data.result);
-    console.log('retUserInfo.createTime.getTime()', retAuthInfo.userInfo?.createTime.toISOString());
-    return retAuthInfo;
+    const retJegRet:JegResult<AuthInfo> = plainToClassFromExist(new JegResult<AuthInfo>(AuthInfo), response.data);
+    if (!retJegRet.result) {
+      throw new Error('Login Fail, Message: Empty AuthInfo' +  response.data);
+    }
+    return retJegRet.result;
 }

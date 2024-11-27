@@ -1,18 +1,27 @@
-import { Transform, Type } from "class-transformer";
-import 'reflect-metadata'; 
-
+import { Exclude, Transform, Type } from "class-transformer";
 export class JegResult<T> {
-    success: boolean;
-    message: string;
-    code: number;
 
-    result: T;
+    @Exclude()
+    private type: Function;
+  
+    @Type(options => {
+      return (options?.newObject as JegResult<T>).type;
+    })
+    result?: T;
 
-    constructor(success: boolean, message: string, code: number, result: T) {
+    success: boolean = false;
+    message: string = '';
+    code: number = 0;
+
+    // constructor(type: Function) {
+    //     this.type = type;
+    // }
+
+    constructor(type: Function, success: boolean = false, message: string = '', code: number = 0) {
         this.success = success;
         this.message = message;
         this.code = code;
-        this.result = result;
+        this.type = type;
     }
 }
 
@@ -39,7 +48,8 @@ export class UserInfo {
     realname: string;
     avatar: string;
     status: number;
-    @Transform(({ value }) => value ? new Date(value) : null)
+    // @Transform(({ value }) => value ? new Date(value) : null)
+    @Type(() =>Date)
     createTime: Date;
 
     constructor(id: string, username: string, realname: string, avatar: string, status: number, createTime: Date) {
