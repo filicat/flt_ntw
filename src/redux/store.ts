@@ -11,7 +11,7 @@ import {
 } from 'redux-persist';
 import storage from '@react-native-async-storage/async-storage';
 import authReducer from './authSlice';
-
+import websocketReducer from './websocketSlice';
 
 const persistConfig = {
   key: 'root',
@@ -22,6 +22,7 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    websocketFav: websocketReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

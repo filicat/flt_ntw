@@ -1,29 +1,29 @@
 import { Exclude, Transform, Type } from "class-transformer";
-export class JegResult<T> {
+// export class JegResult<T> {
 
-    @Exclude()
-    private type: Function;
+//     @Exclude()
+//     private type: Function;
   
-    @Type(options => {
-      return (options?.newObject as JegResult<T>).type;
-    })
-    result?: T;
+//     @Type(options => {
+//       return (options?.newObject as JegResult<T>).type;
+//     })
+//     result?: T;
 
-    success: boolean = false;
-    message: string = '';
-    code: number = 0;
+//     success: boolean = false;
+//     message: string = '';
+//     code: number = 0;
 
-    // constructor(type: Function) {
-    //     this.type = type;
-    // }
+//     // constructor(type: Function) {
+//     //     this.type = type;
+//     // }
 
-    constructor(type: Function, success: boolean = false, message: string = '', code: number = 0) {
-        this.success = success;
-        this.message = message;
-        this.code = code;
-        this.type = type;
-    }
-}
+//     constructor(type: Function, success: boolean = false, message: string = '', code: number = 0) {
+//         this.success = success;
+//         this.message = message;
+//         this.code = code;
+//         this.type = type;
+//     }
+// }
 
 export class AuthInfo {
     @Type(() => UserInfo)
@@ -61,3 +61,32 @@ export class UserInfo {
         this.createTime = createTime;
     }
 }
+
+
+export class JegResult<T> {
+    success: boolean;
+    message: string;
+    code: number;
+  
+    @Exclude()
+    private type: Function;
+    @Type(options => {
+      return (options?.newObject as JegResult<T>).type;
+    })
+    result: T | null;
+    timestamp: number;
+  
+    constructor(type: Function, success: boolean = false, message: string = '', code: number = 0, result: T|null = null, timestamp: number = 0) {
+      this.type = type;
+      this.success = success;
+      this.message = message;
+      this.code = code;
+      this.result = result;
+      this.timestamp = timestamp;
+    }
+  
+    getSucResult(): T {
+      return this.result as T;
+    }
+  }
+  

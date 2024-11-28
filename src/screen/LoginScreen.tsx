@@ -3,6 +3,7 @@ import { DetailsScreenProps, LoginScreenProps } from "../route/RootStackRoute"
 import { LoginApi } from "../apis/LoginApis"
 import { useDispatch } from "react-redux";
 import { login } from "../redux/authSlice";
+import { favMLogin } from "../apis/fav-apis";
 
 export const LoginScreen = ({ route, navigation }: LoginScreenProps) => {
     const dispatch = useDispatch();
@@ -14,6 +15,15 @@ export const LoginScreen = ({ route, navigation }: LoginScreenProps) => {
             Alert.alert("登录失败", e.message, [{ text: "确定" }]);
         })
     }
+    const handleLoginAlternative = () => {
+        favMLogin('172.16.5.142:8080', "admin", "123456").then(ret => {
+            dispatch(login(ret));
+            navigation.navigate("Home");
+        }).catch(e => {
+            console.log(e.message);
+            Alert.alert("登录失败", e.message, [{ text: "确定" }]);
+        })
+    }
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'green' }}>
@@ -21,6 +31,7 @@ export const LoginScreen = ({ route, navigation }: LoginScreenProps) => {
                 <Text>LoginScreen</Text>
             </View>
             <Button title="Login" onPress={handleLogin} />
+            <Button title="Login2" onPress={handleLoginAlternative} />
         </View>
     )
 }
