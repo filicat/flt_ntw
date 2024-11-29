@@ -1,9 +1,12 @@
 // src/features/websocket/websocketSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { JegResult } from '../types';
 
 export interface Message {
-  id: string;
-  content: string;
+  msgId: string;
+  cmd: string;
+  msgTxt: string;
+  timestamp?: number;
 }
 
 export interface WebSocketState {

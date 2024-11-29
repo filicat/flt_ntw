@@ -3,7 +3,7 @@ import { HomeScreenProps } from "../route/RootStackRoute"
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { logout } from "../redux/authSlice";
-import { WebSocketState, setSocket } from "../redux/websocketSlice";
+import { WebSocketState, setSocket, disconnect } from "../redux/websocketSlice";
 import  useWebSocket  from "../hook/useWebSocket";
 export function HomeScreen({ route, navigation }: HomeScreenProps) {
     const dispatch = useDispatch();
@@ -12,6 +12,9 @@ export function HomeScreen({ route, navigation }: HomeScreenProps) {
     const handleLogout = () => {
         dispatch(logout());
         navigation.navigate('Login');
+      };
+      const handleDisConnect = () => {
+        dispatch(disconnect());
       };
 
 
@@ -26,11 +29,15 @@ export function HomeScreen({ route, navigation }: HomeScreenProps) {
             :   <Button title="Go to Login" onPress={() => navigation.navigate('Login')} />
             }
             <Button title="Connect to WebSocket" onPress={connect} />
-
+            <Button title="Disconnect WebSocket" onPress={handleDisConnect} />
+            <Text>WebSocket Status: {isConnected ? 'Connected' : 'Disconnected'}</Text>
+            <Text>Message Queue Status: {messages.length}</Text>
             <View>
             <Text>Messages in Other Screen:</Text>
             {messages.map((message, index) => (
-                <Text key={index}>{message.content}</Text>
+                <View key={index} className="bg-slate-500 w-40 h-16 mb-2">
+                    <Text className="text-black">{new Date(message.timestamp||0).toLocaleString()} {message.msgId} {message.cmd} {message.msgTxt}</Text>
+                </View>
             ))}
             </View>
         </View>
