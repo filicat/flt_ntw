@@ -1,7 +1,7 @@
 // src/hooks/useWebSocket.ts
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Message, WebSocketState, addMessage, disconnect, setSocket } from '../redux/websocketSlice';
+import { Message, WebSocketState, addMessage, disconnect, setSocket } from '../redux/websocketFavSlice';
 import { RootState } from '../redux/store';
 import { Md5 } from 'ts-md5';
 import { plainToClass, plainToClassFromExist } from 'class-transformer';

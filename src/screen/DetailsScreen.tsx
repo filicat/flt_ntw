@@ -1,6 +1,6 @@
 import { Text, View } from "react-native"
-import { DetailsScreenProps } from "../route/RootStackRoute"
 import useWebSocket from "../hook/useWebSocket";
+import { DetailsScreenProps } from "../route/RouteParams";
 
 export const DetailsScreen = ({ route, navigation }: DetailsScreenProps) => {
     const { isConnected, messages, connect } = useWebSocket();

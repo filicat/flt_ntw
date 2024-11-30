@@ -11,7 +11,7 @@ import {
 } from 'redux-persist';
 import storage from '@react-native-async-storage/async-storage';
 import authReducer from './authSlice';
-import websocketReducer from './websocketSlice';
+import websocketReducer from './websocketFavSlice';
 
 const persistConfig = {
   key: 'root',

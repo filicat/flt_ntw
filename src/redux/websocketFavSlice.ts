@@ -1,6 +1,5 @@
 // src/features/websocket/websocketSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { JegResult } from '../types';
 
 export interface Message {
   msgId: string;
@@ -32,6 +31,13 @@ const websocketSlice = createSlice({
     addMessage: (state, action: PayloadAction<Message>) => {
       state.messages.push(action.payload);
     },
+    removeMessage: (state, action: PayloadAction<Message>) => {
+      const indexToRemove = state.messages.findIndex(message => message.msgId === action.payload.msgId);
+      // 如果找到了对应的索引，则使用 splice 方法移除该元素
+      if (indexToRemove !== -1) {
+        state.messages.splice(indexToRemove, 1);
+      };
+    },
     disconnect: (state) => {
       if (state.socket) {
         state.socket.close();
@@ -42,6 +48,6 @@ const websocketSlice = createSlice({
   },
 });
 
-export const { setSocket, addMessage, disconnect } = websocketSlice.actions;
+export const { setSocket, addMessage, removeMessage, disconnect } = websocketSlice.actions;
 
 export default websocketSlice.reducer;
