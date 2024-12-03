@@ -6,6 +6,7 @@ import { RootBotTabParamList } from './RouteParams';
 import { HomeScreen } from '../screen/HomeScreen';
 import { ProfileScreen } from '../screen/ProfileScreen';
 import useWebSocket from '../hook/useWebSocket';
+import TabScreen from '../screen/TabScreen';
 
 // 定义一个类型来表示图标名称
 type IconName = 'home' | 'home-outline' | 'list' | 'list-outline' | 'heart' | 'heart-outline' | 'time' | 'time-outline' | 'person' | 'person-outline';
@@ -63,6 +64,7 @@ const RootBotTabs: React.FC = () => {
     >
       <Tab.Screen name='Home' component={HomeScreen} />
       <Tab.Screen name='Profile' component={ProfileScreen} options={{tabBarBadge: messages.length}} />
+      <Tab.Screen name='Tab' component={TabScreen} />
     </Tab.Navigator>
   )
 }

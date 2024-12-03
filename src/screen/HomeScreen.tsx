@@ -6,6 +6,8 @@ import { WebSocketState, setSocket, disconnect } from "../redux/websocketFavSlic
 import  useWebSocket  from "../hook/useWebSocket";
 import { HomeScreenProps } from "../route/RouteParams";
 import notifee from '@notifee/react-native';
+import { HScollViewComponent } from "../components/HScrollViewComponent";
+import { ScrollView } from "react-native-gesture-handler";
 export function HomeScreen({ route, navigation }: HomeScreenProps) {
     const dispatch = useDispatch();
     const { token, userInfo } = useSelector((state: RootState) => state.auth);
@@ -53,10 +55,10 @@ export function HomeScreen({ route, navigation }: HomeScreenProps) {
             {userInfo ?
             <>
                 <Button title="Logout" onPress={handleLogout} />
-                <Button title="Go to Details" onPress={() => navigation.navigate('Details')} />
             </>
             :   <Button title="Go to Login" onPress={() => navigation.navigate('Login')} />
             }
+            <Button title="Go to Details" onPress={() => navigation.navigate('Details')} />
             <Button title="SendLocalNotification" onPress={handleSendLocalNotification} />
             <Button title="Connect to WebSocket" onPress={connect} />
             <Button title="Disconnect WebSocket" onPress={handleDisConnect} />
@@ -70,6 +72,7 @@ export function HomeScreen({ route, navigation }: HomeScreenProps) {
                 </View>
             ))}
             </View>
+            <HScollViewComponent />
         </View>
     )
 }

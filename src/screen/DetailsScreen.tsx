@@ -1,11 +1,13 @@
-import { Text, View } from "react-native"
+import { ScrollView, Text, View } from "react-native"
 import useWebSocket from "../hook/useWebSocket";
 import { DetailsScreenProps } from "../route/RouteParams";
+import { HScollViewComponent } from "../components/HScrollViewComponent";
 
 export const DetailsScreen = ({ route, navigation }: DetailsScreenProps) => {
     const { isConnected, messages, connect } = useWebSocket();
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'green' }}>
+            <ScrollView className="flex">
             <View className="bg-slate-500 w-32 h-32">
                 <Text>DetailsScreen</Text>
                 <Text>Message Queue Status: {messages.length}</Text>
@@ -18,6 +20,8 @@ export const DetailsScreen = ({ route, navigation }: DetailsScreenProps) => {
             ))}
             </View>
             </View>
+            <HScollViewComponent />
+            </ScrollView>
         </View>
     )
 }

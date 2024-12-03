@@ -11,6 +11,7 @@ export type RootStackParamList = {
 export type RootBotTabParamList = {
     Home: undefined;
     Profile: undefined;
+    Tab: undefined;
   }
 
 
@@ -21,6 +22,10 @@ export type HomeScreenProps = CompositeScreenProps<
 
 export type ProfileScreenProps = CompositeScreenProps<
     BottomTabScreenProps<RootBotTabParamList, 'Profile'>,
+    NativeStackScreenProps<RootStackParamList>
+>;
+export type TabScreenProps = CompositeScreenProps<
+    BottomTabScreenProps<RootBotTabParamList, 'Tab'>,
     NativeStackScreenProps<RootStackParamList>
 >;
 export type DetailsScreenProps = NativeStackScreenProps<RootStackParamList, 'Details'>;
