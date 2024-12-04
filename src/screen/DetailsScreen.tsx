@@ -2,6 +2,7 @@ import { ScrollView, Text, View } from "react-native"
 import useWebSocket from "../hook/useWebSocket";
 import { DetailsScreenProps } from "../route/RouteParams";
 import { HScollViewComponent } from "../components/HScrollViewComponent";
+import { TorrentComponent } from "../components/TorrentComponent";
 
 export const DetailsScreen = ({ route, navigation }: DetailsScreenProps) => {
     const { isConnected, messages, connect } = useWebSocket();
@@ -20,7 +21,7 @@ export const DetailsScreen = ({ route, navigation }: DetailsScreenProps) => {
             ))}
             </View>
             </View>
-            <HScollViewComponent />
+            <TorrentComponent />
             </ScrollView>
         </View>
     )
